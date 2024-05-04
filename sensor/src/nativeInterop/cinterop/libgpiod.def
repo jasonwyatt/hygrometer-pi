@@ -1,0 +1,4 @@
+headers=gpiod.h
+package=libgpiod
+staticLibraries=libgpiod.a
+libraryPaths=src/nativeInterop/cinterop

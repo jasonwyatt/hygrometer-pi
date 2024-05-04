@@ -1,0 +1,10 @@
+{
+    "devicePin": 0,
+    "sampleDurationSeconds": 5,
+    "smsPhoneNumber": "+15555555555",
+    "plantName": "Hosta",
+    "thresholdVoltage": 0.5,
+    "twilioAccountSid": "asdf",
+    "twilioAuthToken": "wafs"
+}
+
