@@ -1,3 +1,7 @@
+val kotlinVersion: String by project
+val ktorVersion: String by project
+val kotlinxSerializationVersion: String by project
+
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization") version "2.0.0-RC2"
@@ -14,13 +18,13 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:2.3.10")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationVersion")
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-test:2.0.0-RC2")
+                implementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
             }
         }
     }
