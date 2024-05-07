@@ -4,21 +4,20 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import io.ktor.util.*
+import kotlinx.coroutines.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okio.FileSystem
 import okio.Path.Companion.toPath
-import us.jwf.hygrometer.JmDNSKey
-import us.jwf.hygrometer.SERVICE_NAME
-import us.jwf.hygrometer.updateServerInfo
+import us.jwf.hygrometer.CONFIG_PATH
+import us.jwf.hygrometer.sensorclient.takeSensorReading
 import us.jwf.hygromter.common.ConfigFile
+import us.jwf.hygromter.common.ReadResponse
 import us.jwf.hygromter.common.Server
 import us.jwf.hygromter.common.Servers
 
 fun Application.configureRouting() {
-
     routing {
         get("/config") {
             call.respond(readConfigFile().sanitizeForWeb())
@@ -29,25 +28,31 @@ fun Application.configureRouting() {
             // ...
             // save
             val newConfig = readConfigFile().merge(authPayload).save()
-            application.updateServerInfo(newConfig)
+            // Report to Avahi
+            application.updateConfigFile(newConfig)
             call.respond(newConfig.sanitizeForWeb())
         }
+        get("/read") {
+            val reading = takeSensorReading()
+            call.respond(
+                ReadResponse(
+                    deviceConfig = readConfigFile(),
+                    reading = reading
+                )
+            )
+        }
         get("/servers") {
-            val jmdns = application.attributes[JmDNSKey]
-            val servers = jmdns.list("_http._tcp.local.").filter { SERVICE_NAME in it.name }
-                .map {
-                    println(it)
-                    Json.decodeFromString<Server>(it.niceTextString.split("=")[1])
-                }
+            val servers = Avahi.list { record ->
+                Json.decodeFromString<Server>(record["info"]!!.decodeBase64String())
+            }
             call.respond(Servers(servers))
         }
     }
 }
 
 suspend fun readConfigFile(): ConfigFile {
-    val configFilePath = System.getenv("HYGROMETER_CONFIG_PATH")
     val fileContents = withContext(Dispatchers.IO) {
-        FileSystem.SYSTEM.read(configFilePath.toPath()) {
+        FileSystem.SYSTEM.read(CONFIG_PATH.toPath()) {
             buildString {
                 do {
                     val line = readUtf8Line()?.let(::appendLine)

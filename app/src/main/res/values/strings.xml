@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Feinstein Plants</string>
+    <string name="home_loading">Loading</string>
+    <string name="server_lookup_idle" />
+    <string name="server_lookup_already_active">Already looking up servers.. hm</string>
+    <string name="server_lookup_internal_error">Something went wrong within NsdManager</string>
+    <string name="server_lookup_bad_parameters">Bad Parameters for NsdManager</string>
+    <string name="server_lookup_op_not_running">Operation Not Running(?)</string>
+    <string name="server_lookup_max_limit">NsdManager hit max limit</string>
+    <string name="server_lookup_error_unknown">Unknown issue with NsdManager</string>
+    <string name="server_lookup_started">Listening for servers</string>
+</resources>

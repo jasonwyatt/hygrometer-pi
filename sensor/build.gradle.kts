@@ -31,7 +31,7 @@ kotlin {
     sourceSets {
         val nativeMain by getting {
             dependencies {
-                implementation("com.squareup.okio:okio:3.9.0")
+                implementation(libs.okio)
                 implementation(project(":shared"))
             }
         }

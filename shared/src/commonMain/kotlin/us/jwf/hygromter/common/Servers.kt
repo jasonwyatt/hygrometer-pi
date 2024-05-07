@@ -10,7 +10,9 @@ data class Servers(
 @Serializable
 data class Server(
     val plantName: String,
-    val configUrl: String,
-    val listServersUrl: String,
+    val baseUrl: String,
+    val configPath: String,
+    val listServersPath: String,
+    val readingPath: String,
     val version: Int,
 )

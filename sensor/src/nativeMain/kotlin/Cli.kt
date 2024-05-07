@@ -1,5 +1,6 @@
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.memScoped
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okio.FileSystem
 import okio.Path.Companion.toPath
@@ -7,6 +8,7 @@ import okio.buffer
 import okio.use
 import platform.posix.*
 import us.jwf.hygromter.common.ConfigFile
+import us.jwf.hygromter.common.Reading
 import kotlin.math.roundToInt
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TimeSource
@@ -39,21 +41,17 @@ class Cli  {
         val start = TimeSource.Monotonic.markNow()
         val average = State.spi.listenVoltage(config.devicePin)
             .takeWhile {
-                TimeSource.Monotonic.markNow() - start < 5.seconds
+                TimeSource.Monotonic.markNow() - start < config.sampleDurationSeconds.seconds
             }
-            .onEach { value ->
-                printf("Sampling: $value\r")
-                fflush(stdout)
+            .onEach {
                 usleep(10000u)
             }
             .average()
-        println()
-        println("Average: $average")
-        if (average > config.thresholdVoltage) {
-            println("${config.plantName} is doing ok")
-        } else {
-            println("${config.plantName.uppercase()} NEEDS WATERING")
-        }
+        val result = Reading(
+            voltage = average.toFloat(),
+            needsWater = average < config.thresholdVoltage
+        )
+        println(Json.encodeToString(result))
 
         State.tearDown()
     }

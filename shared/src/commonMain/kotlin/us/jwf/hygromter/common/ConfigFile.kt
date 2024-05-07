@@ -11,18 +11,20 @@ data class ConfigFile(
     val thresholdVoltage: Float,
     val twilioAccountSid: String,
     val twilioAuthToken: String,
+    val socketPath: String,
 ) {
     fun sanitizeForWeb() = copy(twilioAuthToken = "[REDACTED]")
 
     fun merge(partial: Partial) =
         copy(
             devicePin = partial.devicePin ?: devicePin,
-            sampleDurationSeconds = partial.sampleDurationSeconds ?: devicePin,
+            sampleDurationSeconds = partial.sampleDurationSeconds ?: sampleDurationSeconds,
             smsPhoneNumber = partial.smsPhoneNumber ?: smsPhoneNumber,
             plantName = partial.plantName ?: plantName,
             thresholdVoltage = partial.thresholdVoltage ?: thresholdVoltage,
             twilioAccountSid = partial.twilioAccountSid ?: twilioAccountSid,
             twilioAuthToken = partial.twilioAuthToken ?: twilioAuthToken,
+            socketPath = socketPath
         )
 
     @Serializable

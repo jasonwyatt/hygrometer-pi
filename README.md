@@ -14,6 +14,7 @@ incorrect given the schematic above.
 ### Install Prereqs
 
 * libgpiod
+* avahi-utils
 
 ### Make Initial Config File
 
