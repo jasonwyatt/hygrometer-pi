@@ -1,8 +1,11 @@
-package us.jwf.hygromter.common
+package us.jwf.hygrometer.common
 
 import kotlinx.serialization.Serializable
+import us.jwf.hygrometer.common.util.Parcelable
+import us.jwf.hygrometer.common.util.Parcelize
 
 @Serializable
+@Parcelize
 data class ConfigFile(
     val devicePin: Int,
     val sampleDurationSeconds: Int,
@@ -12,7 +15,7 @@ data class ConfigFile(
     val twilioAccountSid: String,
     val twilioAuthToken: String,
     val socketPath: String,
-) {
+) : Parcelable {
     fun sanitizeForWeb() = copy(twilioAuthToken = "[REDACTED]")
 
     fun merge(partial: Partial) =
@@ -37,4 +40,17 @@ data class ConfigFile(
         val twilioAccountSid: String? = null,
         val twilioAuthToken: String? = null,
     )
+
+    companion object {
+        val DEFAULT = ConfigFile(
+            devicePin = 0,
+            sampleDurationSeconds = 5,
+            smsPhoneNumber = "+15555555555",
+            plantName = "Unnamed plant",
+            thresholdVoltage = 1.5f,
+            twilioAccountSid = "unknown",
+            twilioAuthToken = "unknown",
+            socketPath = "/tmp/hygrometer.sock"
+        )
+    }
 }

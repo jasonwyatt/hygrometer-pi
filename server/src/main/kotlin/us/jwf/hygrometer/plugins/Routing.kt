@@ -12,10 +12,10 @@ import okio.FileSystem
 import okio.Path.Companion.toPath
 import us.jwf.hygrometer.CONFIG_PATH
 import us.jwf.hygrometer.sensorclient.takeSensorReading
-import us.jwf.hygromter.common.ConfigFile
-import us.jwf.hygromter.common.ReadResponse
-import us.jwf.hygromter.common.Server
-import us.jwf.hygromter.common.Servers
+import us.jwf.hygrometer.common.ConfigFile
+import us.jwf.hygrometer.common.ReadResponse
+import us.jwf.hygrometer.common.Server
+import us.jwf.hygrometer.common.Servers
 
 fun Application.configureRouting() {
     routing {
@@ -52,12 +52,17 @@ fun Application.configureRouting() {
 
 suspend fun readConfigFile(): ConfigFile {
     val fileContents = withContext(Dispatchers.IO) {
-        FileSystem.SYSTEM.read(CONFIG_PATH.toPath()) {
-            buildString {
-                do {
-                    val line = readUtf8Line()?.let(::appendLine)
-                } while (line != null)
+        val path = CONFIG_PATH.toPath()
+        if (path.toFile().exists()) {
+            FileSystem.SYSTEM.read(CONFIG_PATH.toPath()) {
+                buildString {
+                    do {
+                        val line = readUtf8Line()?.let(::appendLine)
+                    } while (line != null)
+                }
             }
+        } else {
+            Json.encodeToString(ConfigFile.DEFAULT.save())
         }
     }
     return Json.decodeFromString(fileContents)

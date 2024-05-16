@@ -31,6 +31,17 @@ Example:
 }
 ```
 
+### Steps
+
+1. Create a raspbian image with SSH public key auth configured using `[whatever hostname]`.
+2. Start up the device
+3. `ssh [whatever hostname].local`
+4. `sudo apt-get update && sudo apt-get upgrade`
+5. `sudo apt-get install openjdk-17-jre libgpiod-dev avahi-utils`
+6. Make a `hygrometer` directory in the home dir on the raspberry pi
+7. Update `install_on_pi.zsh` to use `[whatever hostname]` as the `REMOTE_HOST`
+8. Run `install_on_pi.zsh` from your workstation/laptop.
+
 ### Running the sensor 
 
 1. Build the raspberrypi executable

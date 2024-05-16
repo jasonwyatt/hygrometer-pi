@@ -10,8 +10,8 @@ import kotlinx.serialization.json.Json
 import us.jwf.hygrometer.VERSION
 import us.jwf.hygrometer.plugins.Avahi.config
 import us.jwf.hygrometer.plugins.Avahi.scope
-import us.jwf.hygromter.common.ConfigFile
-import us.jwf.hygromter.common.Server
+import us.jwf.hygrometer.common.ConfigFile
+import us.jwf.hygrometer.common.Server
 import java.io.IOException
 import java.net.Inet4Address
 import java.net.InetAddress
@@ -147,7 +147,7 @@ fun Application.updateConfigFile(configFile: ConfigFile? = null) {
             baseUrl = baseUrl,
             configPath = "/config",
             listServersPath = "/servers",
-            readingPath = "/reading",
+            readingPath = "/read",
             version = VERSION
         )
         val jsonServer = Json.encodeToString(server)

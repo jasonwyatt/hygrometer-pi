@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Feinstein Plants</string>
+    <string name="app_name">Smarty Plants</string>
     <string name="home_loading">Loading</string>
     <string name="server_lookup_idle" />
     <string name="server_lookup_already_active">Already looking up servers.. hm</string>
@@ -9,4 +9,22 @@
     <string name="server_lookup_max_limit">NsdManager hit max limit</string>
     <string name="server_lookup_error_unknown">Unknown issue with NsdManager</string>
     <string name="server_lookup_started">Listening for servers</string>
+    <string name="plant_loading">Loading info about %1$s</string>
+    <string name="plant_sample_duration_title">Sampling duration</string>
+    <string name="plant_threshold_voltage">%1$f volts</string>
+    <string name="plant_threshold_voltage_title">Threshold Voltage</string>
+    <string name="plant_sms_number_title">SMS Phone Number</string>
+    <string name="navigate_up">Navigate up</string>
+    <string name="plant_state_label">State:</string>
+    <string name="plant_reading_error">Unknown (error)</string>
+    <string name="plant_reading_unknown">Unknown</string>
+    <string name="plant_reading_loading">Taking a reading…</string>
+    <string name="plant_reading_needs_water">Needs water! (%1$f volts)</string>
+    <string name="plant_reading_doing_fine">Doing fine! (%1$f volts)</string>
+    <string name="plant_take_a_reading">Take a reading</string>
+    <string name="home_pick_a_plant">Your plants</string>
+    <plurals name="plant_sample_duration">
+        <item quantity="one">1 second</item>
+        <item quantity="other">%1$d seconds</item>
+    </plurals>
 </resources>

@@ -1,4 +1,4 @@
-package us.jwf.hygrometer.lookup
+package us.jwf.hygrometer.api
 
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdManager.DiscoveryListener
@@ -15,9 +15,9 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.serialization.json.Json
 import us.jwf.hygrometer.App
 import us.jwf.hygrometer.R
-import us.jwf.hygromter.common.Server
+import us.jwf.hygrometer.common.Server
 
-class ServerLookup(app: App) : DiscoveryListener {
+class ServerLookup(app: App, json: Json) : DiscoveryListener {
     private val wifiManager: WifiManager = app.getSystemService(WifiManager::class.java)
     private val nsdManager: NsdManager = app.getSystemService(NsdManager::class.java)
     private val lock = wifiManager.createMulticastLock("ServerLookup")
@@ -34,8 +34,8 @@ class ServerLookup(app: App) : DiscoveryListener {
                 it.txtRecords["info"]
             }
             .map {
-                val json = Base64.decode(it, Base64.DEFAULT).toString(Charsets.UTF_8)
-                Json.decodeFromString<Server>(json)
+                val raw = Base64.decode(it, Base64.DEFAULT).toString(Charsets.UTF_8)
+                json.decodeFromString<Server>(raw)
             }
     }
 
@@ -73,6 +73,7 @@ class ServerLookup(app: App) : DiscoveryListener {
     }
 
     override fun onServiceFound(serviceInfo: NsdServiceInfo) {
+        @Suppress("DEPRECATION")
         nsdManager.resolveService(
             serviceInfo,
             object : ResolveListener {

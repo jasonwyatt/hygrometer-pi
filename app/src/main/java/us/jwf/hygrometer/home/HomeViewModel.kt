@@ -1,11 +1,8 @@
 package us.jwf.hygrometer.home
 
 import android.app.Application
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,8 +12,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import us.jwf.hygrometer.App
 import us.jwf.hygrometer.R
-import us.jwf.hygrometer.lookup.ServerLookup
-import us.jwf.hygromter.common.Server
+import us.jwf.hygrometer.api.ServerLookup
+import us.jwf.hygrometer.common.Server
 
 class HomeViewModel(
     application: Application

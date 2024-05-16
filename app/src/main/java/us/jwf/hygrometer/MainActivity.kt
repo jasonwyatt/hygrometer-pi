@@ -20,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import us.jwf.hygrometer.home.homeDestination
+import us.jwf.hygrometer.plant.plantDestination
 import us.jwf.hygrometer.ui.theme.HygrometerTheme
 import us.jwf.hygrometer.ui.theme.Typography
 import us.jwf.hygrometer.util.destination
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
                 HygrometerTheme {
                     NavHost(navController = navController, startDestination = "home") {
                         homeDestination()
+                        plantDestination()
                     }
                 }
             }

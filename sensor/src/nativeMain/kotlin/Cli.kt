@@ -7,9 +7,8 @@ import okio.Path.Companion.toPath
 import okio.buffer
 import okio.use
 import platform.posix.*
-import us.jwf.hygromter.common.ConfigFile
-import us.jwf.hygromter.common.Reading
-import kotlin.math.roundToInt
+import us.jwf.hygrometer.common.ConfigFile
+import us.jwf.hygrometer.common.Reading
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TimeSource
 

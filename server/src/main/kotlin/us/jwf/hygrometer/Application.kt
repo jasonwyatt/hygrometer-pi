@@ -23,7 +23,7 @@ val SENSOR_PATH: String
 fun main() {
     embeddedServer(
         factory = Netty,
-        port = 8080,
+        port = System.getenv("HYGROMETER_PORT")?.toIntOrNull() ?: 8080,
         host = "0.0.0.0",
         module = Application::module
     ).start(wait = true)

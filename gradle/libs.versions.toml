@@ -11,6 +11,7 @@ composeBom = "2024.05.00"
 ktor = "3.0.0-beta-1"
 kotlinxSerialization = "1.6.3"
 coroutines = "1.8.1-Beta"
+lottie = "6.4.0"
 okio = "3.9.0"
 
 [libraries]
@@ -28,12 +29,19 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 logback = { group = "ch.qos.logback", name = "logback-classic", version = "1.4.14" }
 
+lottie-core = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+
+okhttp-bom =  { group = "com.squareup.okhttp3", name = "okhttp-bom", version = "5.0.0-alpha.14" }
+okhttp-core = { group = "com.squareup.okhttp3", name = "okhttp" }
+okhttp-coroutines = { group = "com.squareup.okhttp3", name = "okhttp-coroutines" }
 
 kotlinx-atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version = "0.24.0" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-parcelize-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-parcelize-runtime", version.ref = "kotlin"}
 
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-server-content-negotiation = { group = "io.ktor", name = "ktor-server-content-negotiation", version.ref = "ktor" }
@@ -45,3 +53,4 @@ ktor-server-netty = { group = "io.ktor", name = "ktor-server-netty", version.ref
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }

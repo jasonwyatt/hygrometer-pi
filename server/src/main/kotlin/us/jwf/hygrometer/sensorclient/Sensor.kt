@@ -1,18 +1,10 @@
 package us.jwf.hygrometer.sensorclient
 
-import io.ktor.network.selector.*
-import io.ktor.network.sockets.*
-import io.ktor.server.http.*
-import io.ktor.utils.io.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 import us.jwf.hygrometer.CONFIG_PATH
 import us.jwf.hygrometer.SENSOR_PATH
-import us.jwf.hygrometer.plugins.readConfigFile
-import us.jwf.hygromter.common.Reading
-import java.time.Clock
+import us.jwf.hygrometer.common.Reading
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
